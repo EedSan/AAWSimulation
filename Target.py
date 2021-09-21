@@ -62,7 +62,3 @@ class Target:
 
         return go.Scatter3d(x=x_curve, y=y_curve, z=z_curve, marker=dict(size=1, color='darkblue'),
                             line=dict(color='darkblue', width=2))
-
-    @y_coord.setter
-    def y_coord(self, value):
-        self._y_coord = value
