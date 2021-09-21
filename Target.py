@@ -2,7 +2,7 @@ import numpy as np
 import plotly.graph_objects as go
 
 
-class Aim:
+class Target:
     def __init__(self, x_coord, y_coord, trajectory):
         self.x_coord = x_coord
         self.y_coord = y_coord

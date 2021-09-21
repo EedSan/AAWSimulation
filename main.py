@@ -1,7 +1,7 @@
 import plotly.graph_objects as go
 import random
 from AAWArea import sphere
-from Aim import Aim
+from Target import Target
 
 
 def annotate(x_coord, z_coord, txt, x_anchor='center'):
@@ -29,7 +29,7 @@ zero_point = sphere(1, 1, "#000000", 1)
 half_sphere = sphere(100, 50, '#ffff00', 0.2)
 altitude, x_direct, y_direct, x_bias, y_bias = generateAimTrajectoryProperties()
 print(altitude, x_direct, y_direct, x_bias, y_bias)
-aim = Aim.trajectoryEval(altitude, x_direct, y_direct, x_bias, y_bias)
+aim = Target.trajectoryEval(altitude, x_direct, y_direct, x_bias, y_bias)
 
 layout = go.Layout(scene=dict(
     xaxis=dict(nticks=4, range=[-150, 150]),
