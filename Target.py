@@ -3,12 +3,12 @@ import plotly.graph_objects as go
 
 
 class Target:
-    def __init__(self, x_coord, y_coord, z_coord,trajectory):
+    def __init__(self, x_coord, y_coord, z_coord, velocity, trajectory):
         self._x_coord = x_coord
         self._y_coord = y_coord
         self._z_coord = z_coord
+        self._velocity = velocity
         self._trajectory = trajectory
-
 
     @property
     def trajectory(self):
@@ -16,16 +16,19 @@ class Target:
 
     @property
     def x_coord(self):
-        return self.x_coord
+        return self._x_coord
 
     @property
     def y_coord(self):
-        return self.y_coord
+        return self._y_coord
 
     @property
     def z_coord(self):
-        return self.z_coord
+        return self._z_coord
 
+    @property
+    def velocity(self):
+        return self._velocity
 
     @x_coord.setter
     def x_coord(self, value):
@@ -39,10 +42,13 @@ class Target:
     def z_coord(self, value):
         self.z_coord = value
 
+    @velocity.setter
+    def velocity(self, value):
+        self.velocity = value
+
     @trajectory.setter
     def trajectory(self, value):
-        self._trajectory = self.trajectoryEvalds(value[0], value[1], value[2], value[3], value[4])
-
+        self._trajectory = self.trajectoryEval(value[0], value[1], value[2], value[3], value[4])
 
     @staticmethod
     def trajectoryEval(altitude, x_direct, y_direct, x_bias, y_bias):
@@ -62,3 +68,8 @@ class Target:
 
         return go.Scatter3d(x=x_curve, y=y_curve, z=z_curve, marker=dict(size=1, color='darkblue'),
                             line=dict(color='darkblue', width=2))
+
+    @staticmethod
+    def trajectoryFunction(time):
+
+        return "Координаты + время"
