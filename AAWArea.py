@@ -11,6 +11,3 @@ def sphere(radius, height, color, opacity):
     z = height * np.outer(np.ones(100), np.cos(phi))
 
     return go.Surface(x=x, y=y, z=z, colorscale=[[0, color], [1, color]], opacity=opacity, showscale=False)
-
-
-
