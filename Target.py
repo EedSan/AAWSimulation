@@ -18,6 +18,7 @@ class Target:
 
     @staticmethod
     def trajectoryEval(altitude, x_direct, y_direct, x_bias, y_bias):
+        """create target trajectory as parabola"""
         x = np.linspace(-x_direct + x_bias, x_direct + x_bias, 100).tolist()
         y = np.linspace(-y_direct + y_bias, y_direct + y_bias, 100).tolist()
         z = [(-(i ** 2) / 100 + altitude) for i in x]
@@ -34,3 +35,17 @@ class Target:
 
         return go.Scatter3d(x=x_curve, y=y_curve, z=z_curve, marker=dict(size=1, color='darkblue'),
                             line=dict(color='darkblue', width=2))
+
+
+def bezier_quadratic_curve_coords(start_point, end_point, pivot_point):
+    t_parameter = np.linspace(0, 1, 100)
+    x = start_point[0] * (1 - t_parameter) ** 2 + \
+        2 * t_parameter * (pivot_point[0] ** 2) * (1 - t_parameter) + \
+        end_point[0] * t_parameter ** 2
+    y = start_point[1] * (1 - t_parameter) ** 2 + \
+        2 * t_parameter * (pivot_point[1] ** 2) * (1 - t_parameter) + \
+        end_point[1] * t_parameter ** 2
+    z = start_point[2] * (1 - t_parameter) ** 2 + \
+        2 * t_parameter * (pivot_point[2] ** 2) * (1 - t_parameter) + \
+        end_point[2] * t_parameter ** 2
+    return x, y, z
