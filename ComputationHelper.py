@@ -24,7 +24,7 @@ def random_point_in_circle():
 
 def pivot_point(start_point, end_point):
     """Coordinates for pivot point of Quadratic Bezier Curve"""
-    return [(start_point[0] + end_point[0]), (start_point[1]), (start_point[2])]
+    return [0, 0, 0]
 
 
 def generateParabolaProperties():

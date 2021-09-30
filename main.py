@@ -1,12 +1,12 @@
 import plotly.graph_objects as go
 
 from AAWArea import sphere
-from ComputationHelper import random_point_on_sphere_coords, random_point_in_circle, pivot_point, \
-    generateParabolaProperties
+from Animation import Animation
+from ComputationHelper import random_point_on_sphere_coords, random_point_in_circle, pivot_point
 from Target import bezier_quadratic_curve_coords
 
-# zero_point = sphere(1, 1, "#000000", 1)
-# half_sphere = sphere(100, 50, '#ffff00', 0.2)
+zero_point = sphere(1, 1, "#000000", 1)
+half_sphere = sphere(100, 50, '#ffff00', 0.2)
 # altitude, x_direct, y_direct, x_bias, y_bias = generateParabolaProperties()
 
 layout = go.Layout(scene=dict(
@@ -28,5 +28,6 @@ bezier_quadratic_curve = go.Scatter3d(x=bezier_curve[0],
                                       marker=dict(size=1, color='darkblue'),
                                       line=dict(color='darkblue', width=2))
 
-fig = go.Figure(data=[bezier_quadratic_curve], layout=layout)
+fig = Animation(bezier_quadratic_curve, bezier_curve, half_sphere, zero_point)
+
 fig.show()
