@@ -13,18 +13,18 @@ def random_point_on_sphere_coords():
     return x_coord_on_sphere, y_coord_on_sphere, z_coord_on_sphere
 
 
-def random_point_in_circle():
+def random_point_in_circle(point_for_target=(0, 0, 0)):
     circle_radius = 81
     alpha = 2 * math.pi * random.random()
     r = circle_radius * math.sqrt(random.random())
-    x = r * math.cos(alpha)
-    y = r * math.sin(alpha)
+    x = -abs(r * math.cos(alpha)) if point_for_target[0] > 0 else abs(r * math.cos(alpha))
+    y = -abs(r * math.sin(alpha)) if point_for_target[1] > 0 else abs(r * math.sin(alpha))
     return x, y
 
 
 def pivot_point(start_point, end_point):
     """Coordinates for pivot point of Quadratic Bezier Curve"""
-    return [0, 0, 0]
+    return [(start_point[0] + end_point[0]) / 2, (start_point[0] + end_point[0]) / 2, 70]
 
 
 def generateParabolaProperties():
@@ -40,4 +40,4 @@ def generateParabolaProperties():
             y_direct = -y_direct
         x_bias = random.randint(0, 50)
         y_bias = random.randint(0, 50)
-        return [altitude, x_direct, y_direct, x_bias, y_bias]
+        return altitude, x_direct, y_direct, x_bias, y_bias
