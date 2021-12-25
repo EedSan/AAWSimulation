@@ -8,7 +8,10 @@ def Animation(target_curve, target_coords, text, projectile_coords, *additional_
                                           z=[projectile_coords[2][k]], mode="markers",
                                           marker=dict(color="green", size=4))]) for k in
               range(min(len(target_coords[0]), len(projectile_coords[0])))]
-    frames[33].layout.title = f'{text}'
+    if len(frames) > 30:
+        frames[30].layout.title = f'{text}'
+    else:
+        frames[-1].layout.title = f'{text}'
     sliders = [{
         "pad": {"b": 10, "t": 60},
         "len": 0.9,

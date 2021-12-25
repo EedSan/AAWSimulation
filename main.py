@@ -31,20 +31,19 @@ junction_point = go.Scatter3d(x=[bezier_curve[0][index_of_point - 5]], y=[bezier
                               z=[bezier_curve[2][index_of_point - 5]],
                               marker=dict(size=3, color='green'))
 
-projectile_points = create_projectile_trajectory((0, 0, 0), j_point, index_of_point=index_of_point)
+projectile_points = create_projectile_trajectory((0, 0, 0), j_point, index_of_point)
 
-if random.random() < 0.1:  # <- if miss  (if prob > 0.1 -> hit successfully)
+if random.random() < 0.1:  # <- if miss  (if prob > 0.1 => hit successfully)
     projectile_points = np.concatenate((np.zeros((3, (round(random.random()) * 10))), projectile_points), axis=1)
     delta_x = projectile_points[0][-2] - projectile_points[0][-1]
     delta_y = projectile_points[1][-2] - projectile_points[1][-1]
     delta_z = projectile_points[2][-2] - projectile_points[2][-1]
     for i in range(len(bezier_curve[0] - len(projectile_points[0]))):
-        if abs(projectile_points[0][-1]) > 70 and abs(projectile_points[1][-1]) > 70 and abs(
-                projectile_points[2][-1]) > 50:
+        if i < 5:
             a = [projectile_points[0][-1] - delta_x, projectile_points[1][-1] - delta_y,
                  projectile_points[2][-1] - delta_z]
         else:
-            a = [0, 0, 0]
+            a = [projectile_points[0][-1], projectile_points[1][-1], projectile_points[2][-1]]
         b = np.array([a]).T
         projectile_points = np.concatenate([projectile_points, b], axis=1)
     new_bezier_curve = bezier_curve

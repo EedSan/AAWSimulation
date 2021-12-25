@@ -43,10 +43,13 @@ def generateParabolaProperties():
         return [altitude, x_direct, y_direct, x_bias, y_bias]
 
 
-def create_projectile_trajectory(start, junction_point, index_of_point=0):
-    a = (junction_point[1] - start[1]) / (np.cosh(junction_point[0]) - np.cosh(start[0]))
-    b = start[1] - a * np.cosh(start[0])
-    x = np.linspace(start[0], junction_point[0], index_of_point - 5)
-    y = a * np.cosh(x) + b
-    z = np.linspace(start[2], junction_point[2], index_of_point - 5)
+def create_projectile_trajectory(start_point, junction_point, index_of_point):
+    t_parameter = np.linspace(0, 1, index_of_point - 5)
+    pivot = [start_point[0], start_point[0], 30]
+    x = start_point[0] * (1 - t_parameter) ** 2 + 2 * t_parameter * (pivot[0]) * (1 - t_parameter) + junction_point[
+        0] * t_parameter ** 2
+    y = start_point[1] * (1 - t_parameter) ** 2 + 2 * t_parameter * (pivot[1]) * (1 - t_parameter) + junction_point[
+        1] * t_parameter ** 2
+    z = start_point[2] * (1 - t_parameter) ** 2 + 2 * t_parameter * (pivot[2]) * (1 - t_parameter) + junction_point[
+        2] * t_parameter ** 2
     return x, y, z
