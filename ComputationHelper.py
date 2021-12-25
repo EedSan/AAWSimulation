@@ -9,7 +9,7 @@ def random_point_on_sphere_coords():
     parameter_q = random.uniform(0, np.pi * 2)
     x_coord_on_sphere = math.sqrt(10000 - 4 * math.pow(z_coord_on_sphere, 2)) * math.cos(parameter_q)
     y_coord_on_sphere = math.sqrt(10000 - 4 * math.pow(z_coord_on_sphere, 2)) * math.sin(parameter_q)
-    print(f'x, y, z on sphere: {x_coord_on_sphere, y_coord_on_sphere, z_coord_on_sphere}')
+    # print(f'x, y, z on sphere: {x_coord_on_sphere, y_coord_on_sphere, z_coord_on_sphere}')
     return x_coord_on_sphere, y_coord_on_sphere, z_coord_on_sphere
 
 
@@ -24,7 +24,7 @@ def random_point_in_circle(point_for_target=(0, 0, 0)):
 
 def pivot_point(start_point, end_point):
     """Coordinates for pivot point of Quadratic Bezier Curve"""
-    return [(start_point[0] + end_point[0]) / 2, (start_point[0] + end_point[0]) / 2, 70]
+    return [0, 0, 70]
 
 
 def generateParabolaProperties():
@@ -40,4 +40,13 @@ def generateParabolaProperties():
             y_direct = -y_direct
         x_bias = random.randint(0, 50)
         y_bias = random.randint(0, 50)
-        return altitude, x_direct, y_direct, x_bias, y_bias
+        return [altitude, x_direct, y_direct, x_bias, y_bias]
+
+
+def create_projectile_trajectory(start, junction_point, index_of_point=0):
+    a = (junction_point[1] - start[1]) / (np.cosh(junction_point[0]) - np.cosh(start[0]))
+    b = start[1] - a * np.cosh(start[0])
+    x = np.linspace(start[0], junction_point[0], index_of_point - 5)
+    y = a * np.cosh(x) + b
+    z = np.linspace(start[2], junction_point[2], index_of_point - 5)
+    return x, y, z
